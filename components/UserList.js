@@ -13,8 +13,6 @@ const GET_USERS = gql`
 function UserList() {
   const { loading, error, data } = useQuery(GET_USERS);
 
-  console.log(data);
-
   if (data && data.users) {
     return data.users.map((user) => (
       <div>
