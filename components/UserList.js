@@ -6,6 +6,7 @@ const GET_USERS = gql`
       id
       name
       email
+      avatar
     }
   }
 `;
@@ -15,7 +16,10 @@ function UserList() {
 
   if (data && data.users) {
     return data.users.map((user) => (
-      <div>
+      <div key={user.id}>
+        <div>
+          <img src={user.avatar} alt={user.name} />
+        </div>
         <div>{user.name}</div>
         <div>{user.email}</div>
       </div>
