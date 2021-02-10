@@ -2,12 +2,13 @@ import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 
 const GET_USER = gql`
-  query UserProfile($id: ID!) {
-    user(id: $id) {
+  query UserProfile($username: String!) {
+    user(username: $username) {
       id
       name
       email
       avatar
+      username
     }
   }
 `;
@@ -16,7 +17,7 @@ function UserProfile() {
   const router = useRouter();
   const { loading, error, data } = useQuery(GET_USER, {
     variables: {
-      id: router.query.username,
+      username: router.query.username,
     },
   });
 
