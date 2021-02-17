@@ -1,5 +1,6 @@
-import withApollo from "../lib/apollo";
-import UserList from "../components/UserList";
+import withApollo from "../lib/apolloClient";
+import UserList, { ALL_USERS_QUERY } from "../components/UserList";
+import { initializeApollo, addApolloState } from "../lib/apolloClient";
 
 const Home = (props) => {
   return (
@@ -12,4 +13,16 @@ const Home = (props) => {
   );
 };
 
-export default withApollo({ ssr: true })(Home);
+export async function getServerSideProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: ALL_USERS_QUERY,
+  });
+
+  return addApolloState(apolloClient, {
+    props: {},
+  });
+}
+
+export default Home;

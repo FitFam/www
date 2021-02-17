@@ -1,6 +1,7 @@
 import { Flex, Box, Image, Link } from "@chakra-ui/react";
 import Head from "next/head";
 import NextLink from "next/link";
+import LoggedInUserPicMenu from "../components/LoggedInUserPicMenu";
 
 const Layout = ({ children }) => {
   return (
@@ -32,6 +33,8 @@ const Layout = ({ children }) => {
               </Link>
             </NextLink>
           </Box>
+
+          <LoggedInUserPicMenu />
         </Flex>
 
         <Box px={6} py={4}>

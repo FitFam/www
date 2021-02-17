@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
-const GET_USERS = gql`
+export const ALL_USERS_QUERY = gql`
   query allUsers {
     users {
       id
@@ -12,7 +12,7 @@ const GET_USERS = gql`
 `;
 
 function UserList() {
-  const { loading, error, data } = useQuery(GET_USERS);
+  const { loading, error, data } = useQuery(ALL_USERS_QUERY);
 
   if (data && data.users) {
     return data.users.map((user) => (
