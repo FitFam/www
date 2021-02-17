@@ -31,9 +31,7 @@ export const GET_LOGGED_IN_USER_QUERY = gql`
 const LoggedInUserPicMenu = () => {
   const { loading, error, data } = useQuery(GET_LOGGED_IN_USER_QUERY);
 
-  console.log("loggedInUserPicMenu", data);
-
-  if (!data.getLoggedInUser) {
+  if (!data && !data?.getLoggedInUser) {
     return (
       <Button>
         <Link href={`${process.env.NEXT_PUBLIC_AUTH_API_URL}/facebook`}>
