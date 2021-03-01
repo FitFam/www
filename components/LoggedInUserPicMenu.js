@@ -61,7 +61,7 @@ const LoggedInUserPicMenu = () => {
           </NextLink>
         </MenuItem>
         <MenuItem>
-          <NextLink href="/[username]/edit" as={`/${user.username}/edit`}>
+          <NextLink href="/profile/edit">
             <Link width="100%">Edit Profile</Link>
           </NextLink>
         </MenuItem>
