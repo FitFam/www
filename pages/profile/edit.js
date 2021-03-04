@@ -28,7 +28,6 @@ const EditProfilePage = () => {
   const { register, handleSubmit, watch, errors } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     updateUsername({
       variables: {
         username: data.username,
@@ -43,7 +42,7 @@ const EditProfilePage = () => {
         <Stack spacing={3}>
           <FormControl id="username">
             <FormLabel>Username</FormLabel>
-            <Input placeholder="username" ref={register} />
+            <Input name="username" ref={register} />
           </FormControl>
 
           <FormControl>
