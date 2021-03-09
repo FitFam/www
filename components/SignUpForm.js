@@ -25,10 +25,13 @@ const SIGNUP_MUTATION = gql`
       name: $name
       username: $username
     ) {
-      id
-      name
-      username
-      email
+      authToken
+      user {
+        id
+        name
+        username
+        email
+      }
     }
   }
 `;
@@ -48,6 +51,11 @@ const SingUpForm = () => {
       },
     });
   };
+
+  if (data) {
+    console.log({ data });
+    localStorage.setItem("authToken", data.createUser.authToken);
+  }
 
   return (
     <Container>
