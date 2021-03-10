@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "../lib/apolloClient";
 import { ChakraProvider } from "@chakra-ui/react";
+import { UserProvider } from "../lib/userContext";
 
 function App({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps);
@@ -9,9 +10,11 @@ function App({ Component, pageProps }) {
   return (
     <ApolloProvider client={apolloClient}>
       <ChakraProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <UserProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </UserProvider>
       </ChakraProvider>
     </ApolloProvider>
   );

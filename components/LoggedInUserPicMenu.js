@@ -65,6 +65,18 @@ const LoggedInUserPicMenu = () => {
             <Link width="100%">Edit Profile</Link>
           </NextLink>
         </MenuItem>
+        <MenuItem>
+          <NextLink href="/">
+            <Link
+              onClick={() => {
+                localStorage.removeItem("authToken");
+                window.location;
+              }}
+            >
+              Log Out
+            </Link>
+          </NextLink>
+        </MenuItem>
       </MenuList>
     </Menu>
   );
