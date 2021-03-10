@@ -34,9 +34,7 @@ const LoggedInUserPicMenu = () => {
   if (!data && !data?.getLoggedInUser) {
     return (
       <Button>
-        <Link href={`${process.env.NEXT_PUBLIC_AUTH_API_URL}/facebook`}>
-          Login
-        </Link>
+        <Link href="/login">Login</Link>
       </Button>
     );
   }
