@@ -10,6 +10,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import Router from "next/router";
 
 const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
@@ -36,6 +37,11 @@ const LoginPage = () => {
       },
     });
   };
+
+  if (data?.login) {
+    localStorage.setItem("authToken", data.login.authToken);
+    Router.push("/profile/edit");
+  }
 
   return (
     <Container>
