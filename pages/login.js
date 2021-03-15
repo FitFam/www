@@ -1,3 +1,4 @@
+import React, { useEffect, useContext } from "react";
 import { gql, useMutation } from "@apollo/client";
 import {
   Container,
@@ -11,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
+import UserContext from "../lib/userContext";
 
 const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
@@ -28,6 +30,15 @@ const LOGIN_MUTATION = gql`
 const LoginPage = () => {
   const [login, { data }] = useMutation(LOGIN_MUTATION);
   const { register, handleSubmit, watch, errors } = useForm();
+  const { refetch } = useContext(UserContext);
+
+  useEffect(() => {
+    if (data?.login) {
+      localStorage.setItem("authToken", data.login.authToken);
+      refetch();
+      Router.push("/profile/edit");
+    }
+  }, [data]);
 
   const onSubmit = (data) => {
     login({
@@ -37,11 +48,6 @@ const LoginPage = () => {
       },
     });
   };
-
-  if (data?.login) {
-    localStorage.setItem("authToken", data.login.authToken);
-    Router.push("/profile/edit");
-  }
 
   return (
     <Container>

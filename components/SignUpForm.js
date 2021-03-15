@@ -1,3 +1,4 @@
+import React, { useEffect, useContext } from "react";
 import { gql, useMutation } from "@apollo/client";
 import {
   Container,
@@ -11,6 +12,8 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import Router from "next/router";
+import UserContext from "../lib/userContext";
 
 const SIGNUP_MUTATION = gql`
   mutation SignUpUser(
@@ -39,9 +42,17 @@ const SIGNUP_MUTATION = gql`
 const SingUpForm = () => {
   const [signUp, { data }] = useMutation(SIGNUP_MUTATION);
   const { register, handleSubmit, watch, errors } = useForm();
+  const { refetch } = useContext(UserContext);
+
+  useEffect(() => {
+    if (data?.createUser) {
+      localStorage.setItem("authToken", data.createUser.authToken);
+      refetch();
+      Router.push("/profile/edit");
+    }
+  }, [data]);
 
   const onSubmit = (data) => {
-    console.log(data);
     signUp({
       variables: {
         email: data.email,
@@ -51,11 +62,6 @@ const SingUpForm = () => {
       },
     });
   };
-
-  if (data) {
-    console.log({ data });
-    localStorage.setItem("authToken", data.createUser.authToken);
-  }
 
   return (
     <Container>

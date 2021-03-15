@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import NextLink from "next/link";
 import {
   Link,
@@ -15,24 +15,13 @@ import {
   Box,
   Avatar,
 } from "@chakra-ui/react";
-import { gql, useQuery } from "@apollo/client";
-
-export const GET_LOGGED_IN_USER_QUERY = gql`
-  query getLoggedInUser {
-    getLoggedInUser {
-      id
-      name
-      username
-      email
-      avatar
-    }
-  }
-`;
+import UserContext from "../lib/userContext";
+import Router from "next/router";
 
 const LoggedInUserPicMenu = () => {
-  const { loading, error, data } = useQuery(GET_LOGGED_IN_USER_QUERY);
+  const { user, refetch } = useContext(UserContext);
 
-  if (!data && !data?.getLoggedInUser) {
+  if (!user) {
     return (
       <Button>
         <Link href="/login">Login</Link>
@@ -40,18 +29,10 @@ const LoggedInUserPicMenu = () => {
     );
   }
 
-  const user = data.getLoggedInUser;
-
   return (
     <Menu>
       <MenuButton>
-        <Avatar
-          src={user.avatar}
-          alt={user.name}
-          height="35px"
-          width="35px"
-          ignoreFallback
-        />
+        <Avatar src={user.avatar} alt={user.name} height="35px" width="35px" />
       </MenuButton>
       <MenuList>
         <MenuItem>
@@ -69,7 +50,7 @@ const LoggedInUserPicMenu = () => {
             <Link
               onClick={() => {
                 localStorage.removeItem("authToken");
-                window.location;
+                window.location.href = "/";
               }}
             >
               Log Out
