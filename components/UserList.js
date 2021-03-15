@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
-import { Avatar, Flex, Box, Stack } from "@chakra-ui/react";
+import { Avatar, Flex, Box, Stack, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 export const ALL_USERS_QUERY = gql`
   query allUsers {
@@ -8,6 +9,7 @@ export const ALL_USERS_QUERY = gql`
       name
       email
       avatar
+      username
     }
   }
 `;
@@ -20,10 +22,19 @@ function UserList() {
       <Stack spacing={3}>
         {data.users.map((user) => (
           <Flex key={user.id}>
-            <Avatar src={user.avatar} alt={user.name} mr={3} />
+            <NextLink href="/[username]" as={`/${user.username}`} passHref>
+              <Link>
+                <Avatar src={user.avatar} alt={user.name} mr={3} />
+              </Link>
+            </NextLink>
+
             <Box>
-              <div>{user.name}</div>
-              <div>{user.email}</div>
+              <NextLink href="/[username]" as={`/${user.username}`} passHref>
+                <Link>
+                  <div>{user.name}</div>
+                  <div>{user.email}</div>
+                </Link>
+              </NextLink>
             </Box>
           </Flex>
         ))}
