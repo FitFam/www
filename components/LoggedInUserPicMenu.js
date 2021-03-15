@@ -13,6 +13,7 @@ import {
   MenuItemOption,
   Button,
   Box,
+  Avatar,
 } from "@chakra-ui/react";
 import { gql, useQuery } from "@apollo/client";
 
@@ -44,11 +45,11 @@ const LoggedInUserPicMenu = () => {
   return (
     <Menu>
       <MenuButton>
-        <Image
+        <Avatar
           src={user.avatar}
           alt={user.name}
           height="35px"
-          rounded="full"
+          width="35px"
           ignoreFallback
         />
       </MenuButton>
