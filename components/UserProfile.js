@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { Flex, Box } from "@chakra-ui/react";
 
 const GET_USER = gql`
   query UserProfile($username: String!) {
@@ -9,6 +10,7 @@ const GET_USER = gql`
       email
       avatar
       username
+      bio
     }
   }
 `;
@@ -22,10 +24,15 @@ function UserProfile() {
   });
 
   if (data && data.user) {
-    return <div>{data.user.name}</div>;
+    return (
+      <Box>
+        <Box>{data.user.name}</Box>
+        <Box>{data.user.bio}</Box>
+      </Box>
+    );
   }
 
-  return <div>User not found.</div>;
+  return <Box>User not found.</Box>;
 }
 
 export default UserProfile;
