@@ -15,12 +15,14 @@ import { useForm } from "react-hook-form";
 import withAuth from "../lib/withAuth";
 
 const EDIT_PROFILE_MUTATION = gql`
-  mutation UpdateUser($username: String, $bio: String) {
-    updateUser(username: $username, bio: $bio) {
+  mutation UpdateUser($username: String, $bio: String, $instagram: String) {
+    updateUser(username: $username, bio: $bio, instagram: $instagram) {
       id
       username
       email
       avatar
+      bio
+      instagram
     }
   }
 `;
@@ -30,6 +32,7 @@ const EditProfile = ({ loggedInUser }) => {
   const { register, handleSubmit, watch, errors } = useForm({
     defaultValues: {
       username: loggedInUser.username,
+      instagram: loggedInUser.instagram,
       bio: loggedInUser.bio,
     },
   });
@@ -38,6 +41,7 @@ const EditProfile = ({ loggedInUser }) => {
     updateUsername({
       variables: {
         username: data.username,
+        instagram: data.instagram,
         bio: data.bio,
       },
     });
@@ -51,6 +55,11 @@ const EditProfile = ({ loggedInUser }) => {
           <FormControl id="username">
             <FormLabel>Username</FormLabel>
             <Input name="username" ref={register} />
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Instagram</FormLabel>
+            <Input name="instagram" ref={register} />
           </FormControl>
 
           <FormControl>
