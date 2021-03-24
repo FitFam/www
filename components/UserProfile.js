@@ -1,6 +1,14 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { Flex, Box, Avatar, Heading, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Avatar,
+  Stack,
+  Heading,
+  Text,
+  Link,
+} from "@chakra-ui/react";
 
 const GET_USER = gql`
   query UserProfile($username: String!) {
@@ -11,6 +19,7 @@ const GET_USER = gql`
       avatar
       username
       bio
+      instagram
     }
   }
 `;
@@ -34,7 +43,22 @@ function UserProfile() {
           </Box>
         </Flex>
 
-        <Text>{data.user.bio}</Text>
+        <Stack spacing={3}>
+          <Box>
+            <Heading size="sm">Bio</Heading>
+            <Text>{data.user.bio}</Text>
+          </Box>
+
+          <Box>
+            <Heading size="sm">Instagram</Heading>
+            <Link
+              isExternal
+              href={`https://instagram.com/${data.user.instagram}`}
+            >
+              {data.user.instagram}
+            </Link>
+          </Box>
+        </Stack>
       </Box>
     );
   }
