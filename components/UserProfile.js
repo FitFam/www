@@ -32,6 +32,8 @@ function UserProfile() {
     },
   });
 
+  if (loading) return null;
+
   if (data && data.user) {
     return (
       <Box>
