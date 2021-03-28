@@ -10,6 +10,8 @@ import {
   FormControl,
   FormLabel,
   Stack,
+  InputGroup,
+  InputLeftElement,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
@@ -89,7 +91,15 @@ const SingUpForm = () => {
 
           <FormControl id="username">
             <FormLabel>Username</FormLabel>
-            <Input name="username" ref={register({ required: true })} />
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                color="gray.300"
+                fontSize="1.2em"
+                children="@"
+              />
+              <Input name="username" ref={register({ required: true })} />
+            </InputGroup>
           </FormControl>
         </Stack>
 
