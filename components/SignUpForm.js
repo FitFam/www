@@ -93,8 +93,19 @@ const SingUpForm = () => {
           </FormControl>
         </Stack>
 
-        <Button mt={4} onClick={handleSubmit(onSubmit)}>
-          Submit
+        <Button
+          mt={4}
+          size="lg"
+          width="100%"
+          onClick={handleSubmit(onSubmit)}
+          backgroundColor="#0D6CFF"
+          color="#fff"
+          _hover={{
+            background: "#0D6CFF",
+            opacity: "0.9",
+          }}
+        >
+          Sign Up
         </Button>
       </Box>
     </Container>
