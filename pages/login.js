@@ -9,6 +9,7 @@ import {
   FormControl,
   FormLabel,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
@@ -28,7 +29,7 @@ const LOGIN_MUTATION = gql`
 `;
 
 const LoginPage = () => {
-  const [login, { data }] = useMutation(LOGIN_MUTATION);
+  const [login, { data, error: mutationError }] = useMutation(LOGIN_MUTATION);
   const { register, handleSubmit, watch, errors } = useForm();
   const { refetch } = useContext(UserContext);
 
@@ -49,11 +50,19 @@ const LoginPage = () => {
     });
   };
 
+  console.log({ mutationError });
+
   return (
     <Container>
       <Heading mb={4}>Log In</Heading>
       <Box>
         <Stack spacing={3}>
+          {mutationError && (
+            <Text color="red.300" fontWeight="bold">
+              {mutationError.message}
+            </Text>
+          )}
+
           <FormControl id="username">
             <FormLabel>Email</FormLabel>
             <Input name="email" ref={register} />
