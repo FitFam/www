@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
-import UserContext from "../lib/userContext";
+import UserContext, { GET_LOGGED_IN_USER_QUERY } from "../lib/userContext";
 
 const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
@@ -33,18 +33,16 @@ const LoginPage = () => {
     onError: () => null,
   });
   const { register, handleSubmit, watch, errors } = useForm();
-  const { user, refetch } = useContext(UserContext);
+  const { refetch } = useContext(UserContext);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (data?.login) {
       localStorage.setItem("authToken", data.login.authToken);
-      refetch();
-    }
+      const { data: refetchData } = await refetch();
 
-    if (user) {
       Router.push("/profile/edit");
     }
-  }, [data, user]);
+  }, [data]);
 
   const onSubmit = (data) => {
     login({

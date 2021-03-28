@@ -44,12 +44,13 @@ const SIGNUP_MUTATION = gql`
 const SingUpForm = () => {
   const [signUp, { data }] = useMutation(SIGNUP_MUTATION);
   const { register, handleSubmit, watch, errors } = useForm();
-  const { refetch } = useContext(UserContext);
+  const { user, refetch } = useContext(UserContext);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (data?.createUser) {
       localStorage.setItem("authToken", data.createUser.authToken);
-      refetch();
+      const { data: refetchData } = await refetch();
+
       Router.push("/profile/edit");
     }
   }, [data]);
