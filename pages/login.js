@@ -33,15 +33,18 @@ const LoginPage = () => {
     onError: () => null,
   });
   const { register, handleSubmit, watch, errors } = useForm();
-  const { refetch } = useContext(UserContext);
+  const { user, refetch } = useContext(UserContext);
 
   useEffect(() => {
     if (data?.login) {
       localStorage.setItem("authToken", data.login.authToken);
       refetch();
+    }
+
+    if (user) {
       Router.push("/profile/edit");
     }
-  }, [data]);
+  }, [data, user]);
 
   const onSubmit = (data) => {
     login({
