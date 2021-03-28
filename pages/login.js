@@ -29,7 +29,9 @@ const LOGIN_MUTATION = gql`
 `;
 
 const LoginPage = () => {
-  const [login, { data, error: mutationError }] = useMutation(LOGIN_MUTATION);
+  const [login, { data, error: mutationError }] = useMutation(LOGIN_MUTATION, {
+    onError: () => null,
+  });
   const { register, handleSubmit, watch, errors } = useForm();
   const { refetch } = useContext(UserContext);
 
@@ -49,8 +51,6 @@ const LoginPage = () => {
       },
     });
   };
-
-  console.log({ mutationError });
 
   return (
     <Container>
