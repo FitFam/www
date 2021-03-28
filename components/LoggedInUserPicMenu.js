@@ -23,9 +23,9 @@ const LoggedInUserPicMenu = () => {
 
   if (!user) {
     return (
-      <Button>
-        <Link href="/login">Login</Link>
-      </Button>
+      <NextLink href="/login" passHref>
+        <Button as={Link}>Login</Button>
+      </NextLink>
     );
   }
 
@@ -36,12 +36,12 @@ const LoggedInUserPicMenu = () => {
       </MenuButton>
       <MenuList>
         <MenuItem>
-          <NextLink href="/[username]" as={`/${user.username}`}>
+          <NextLink href="/[username]" as={`/${user.username}`} passHref>
             <Link width="100%">@{user.username}</Link>
           </NextLink>
         </MenuItem>
         <MenuItem>
-          <NextLink href="/profile/edit">
+          <NextLink href="/profile/edit" passHref>
             <Link width="100%">Edit Profile</Link>
           </NextLink>
         </MenuItem>
