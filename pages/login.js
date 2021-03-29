@@ -57,27 +57,34 @@ const LoginPage = () => {
     <Container>
       <Heading mb={4}>Log In</Heading>
       <Box>
-        <Stack spacing={3}>
-          {mutationError && (
-            <Text color="red.300" fontWeight="bold">
-              {mutationError.message}
-            </Text>
-          )}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Stack spacing={3}>
+            {mutationError && (
+              <Text color="red.300" fontWeight="bold">
+                {mutationError.message}
+              </Text>
+            )}
 
-          <FormControl id="username">
-            <FormLabel>Email</FormLabel>
-            <Input name="email" ref={register} />
-          </FormControl>
+            <FormControl id="username">
+              <FormLabel>Email</FormLabel>
+              <Input name="email" autoComplete="email" ref={register} />
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>Password</FormLabel>
-            <Input name="password" type="password" ref={register} />
-          </FormControl>
-        </Stack>
+            <FormControl>
+              <FormLabel>Password</FormLabel>
+              <Input
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                ref={register}
+              />
+            </FormControl>
+          </Stack>
 
-        <Button mt={4} onClick={handleSubmit(onSubmit)}>
-          Log In
-        </Button>
+          <Button mt={4} type="submit">
+            Log In
+          </Button>
+        </form>
       </Box>
     </Container>
   );
