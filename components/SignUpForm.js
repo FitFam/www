@@ -70,54 +70,69 @@ const SingUpForm = () => {
     <Container>
       <Heading mb={4}>Sign Up</Heading>
       <Box>
-        <Stack spacing={3}>
-          <FormControl id="email">
-            <FormLabel>Email</FormLabel>
-            <Input name="email" ref={register({ required: true })} />
-          </FormControl>
-
-          <FormControl id="password">
-            <FormLabel>Password</FormLabel>
-            <Input
-              name="password"
-              type="password"
-              ref={register({ required: true })}
-            />
-          </FormControl>
-
-          <FormControl id="name">
-            <FormLabel>Name</FormLabel>
-            <Input name="name" ref={register({ required: true })} />
-          </FormControl>
-
-          <FormControl id="username">
-            <FormLabel>Username</FormLabel>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.2em"
-                children="@"
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Stack spacing={3}>
+            <FormControl id="email">
+              <FormLabel>Email</FormLabel>
+              <Input
+                name="email"
+                autoComplete="email"
+                ref={register({ required: true })}
               />
-              <Input name="username" ref={register({ required: true })} />
-            </InputGroup>
-          </FormControl>
-        </Stack>
+            </FormControl>
 
-        <Button
-          mt={4}
-          size="lg"
-          width="100%"
-          onClick={handleSubmit(onSubmit)}
-          backgroundColor="#0D6CFF"
-          color="#fff"
-          _hover={{
-            background: "#0D6CFF",
-            opacity: "0.9",
-          }}
-        >
-          Sign Up
-        </Button>
+            <FormControl id="password">
+              <FormLabel>Password</FormLabel>
+              <Input
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                ref={register({ required: true })}
+              />
+            </FormControl>
+
+            <FormControl id="name">
+              <FormLabel>Name</FormLabel>
+              <Input
+                name="name"
+                autoComplete="name"
+                ref={register({ required: true })}
+              />
+            </FormControl>
+
+            <FormControl id="username">
+              <FormLabel>Username</FormLabel>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  color="gray.300"
+                  fontSize="1.2em"
+                  children="@"
+                />
+                <Input
+                  name="username"
+                  autoComplete="username"
+                  ref={register({ required: true })}
+                />
+              </InputGroup>
+            </FormControl>
+          </Stack>
+
+          <Button
+            type="submit"
+            mt={4}
+            size="lg"
+            width="100%"
+            backgroundColor="#0D6CFF"
+            color="#fff"
+            _hover={{
+              background: "#0D6CFF",
+              opacity: "0.9",
+            }}
+          >
+            Sign Up
+          </Button>
+        </form>
       </Box>
     </Container>
   );
