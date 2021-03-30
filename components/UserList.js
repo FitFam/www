@@ -7,6 +7,7 @@ export const ALL_USERS_QUERY = gql`
     users {
       id
       name
+      username
       email
       avatar
       username
@@ -21,7 +22,7 @@ function UserList() {
     return (
       <Stack spacing={3}>
         {data.users.map((user) => (
-          <Flex key={user.id}>
+          <Flex key={user.id} align="center">
             <NextLink href="/[username]" as={`/${user.username}`} passHref>
               <Link>
                 <Avatar src={user.avatar} alt={user.name} mr={3} />
@@ -32,7 +33,7 @@ function UserList() {
               <NextLink href="/[username]" as={`/${user.username}`} passHref>
                 <Link>
                   <div>{user.name}</div>
-                  <div>{user.email}</div>
+                  <div>@{user.username}</div>
                 </Link>
               </NextLink>
             </Box>
